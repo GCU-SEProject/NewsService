@@ -1,0 +1,34 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /news-service
+
+spring:
+  application:
+    name: news-service
+  config:
+    import: optional:config/application-secret.yml
+  profiles:
+    include: secret
+
+naver:
+  client:
+    id: ${naver.client.id}
+    secret: ${naver.client.secret}
+  api:
+    base-url: https://openapi.naver.com
+    news-search-url: /v1/search/news.json
+    default-display: 1
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
